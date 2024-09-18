@@ -1,24 +1,21 @@
 {
-  "name": "biniverse-backend",
+  "name": "biniverse",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "nodemon --watch src --exec ts-node src/index.ts",
-    "build": "tsc"
+    "start:backend": "cd backend && npm run start",
+    "start:frontend": "cd frontend && npm run start",
+    "start": "concurrently \"npm run start:frontend\" \"npm run start:backend\"",
+    "install:frontend": "cd frontend && npm install",
+    "install:backend": "cd backend && npm install",
+    "install": "concurrently \"npm run install:frontend\" \"npm run install:backend\""
   },
   "keywords": [],
-  "author": "",
+  "author": "John Patrick Ryan D. Mandal",
   "license": "ISC",
-  "dependencies": {
-    "express": "^4.21.0",
-    "nodemon": "^3.1.5"
-  },
   "devDependencies": {
-    "@types/express": "^4.17.21",
-    "@types/node": "^22.5.5",
-    "ts-node": "^10.9.2",
-    "typescript": "^5.6.2"
+    "concurrently": "^9.0.1"
   }
 }
