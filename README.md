@@ -56,7 +56,7 @@ Before you begin, ensure you have the following installed:
    ```
 2. On the root directory, install concurrently
    ```bash
-   npm install
+   npm install concurrently --save-dev
    ```
 3. Install frontend and backend dependencies using concurrently (naa nani script sa package.json)
    ```bash
