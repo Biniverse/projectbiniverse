@@ -1,4 +1,4 @@
-# Project Name
+# BINIVERSE
 
 **Description**:  
 This is a collaborative project between coworkers, built using TypeScript and Express. The project aims to create a modular, scalable backend service with modern best practices.
@@ -50,8 +50,8 @@ Before you begin, ensure you have the following installed:
 
 1. Clone the repository:
    ```bash
-   git clone https://github.com/biniverse.git
-   cd repo-folder
+   git clone https://github.com/Biniverse/server-test.git
+   cd server-test
    ```
 2. Install the dependencies
    ```bash
@@ -62,7 +62,7 @@ Before you begin, ensure you have the following installed:
 
 1. Run the development server with Nodemon:
    ```bash
-   npm run dev
+   npm run start
    ```
 2. To build and start the application:
    ```bash
@@ -71,6 +71,8 @@ Before you begin, ensure you have the following installed:
    ```
 
 ## Project Structure
+
+### Backend
 
 ```bash
     src/
@@ -93,4 +95,9 @@ vercel
 
 ## Contributors
 
-- Stephen Mapagmahal
+- [Stephen S. Abueva](https://github.com/stephenabv)
+- [Edward Joseph A. Habon](https://github.com/edzhabs)
+- [John Patrick Ryan D. Mandal](https://github.com/beefysalad)
+- [Jovany S. Opelina](https://github.com/bankaihekai)
+- [Ester S. Hubahib](https://github.com/essiee06)
+- [Ron Dave N. Talledo](https://github.com/22tofu)
