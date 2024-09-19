@@ -4,6 +4,6 @@ import { getHelloWorld } from "../controller/userController";
 
 const userRouter = Router();
 
-userRouter.get("/", getHelloWorld);
+userRouter.get("/test", getHelloWorld);
 
 export default userRouter;
