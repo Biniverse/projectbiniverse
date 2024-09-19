@@ -10,7 +10,8 @@
     "start": "concurrently \"npm run start:frontend\" \"npm run start:backend\"",
     "install:frontend": "cd frontend && npm install",
     "install:backend": "cd backend && npm install",
-    "install": "concurrently \"npm run install:frontend\" \"npm run install:backend\""
+    "install": "concurrently \"npm run install:frontend\" \"npm run install:backend\"",
+    "build": "cd backend && npm run build"
   },
   "keywords": [],
   "author": "John Patrick Ryan D. Mandal",
