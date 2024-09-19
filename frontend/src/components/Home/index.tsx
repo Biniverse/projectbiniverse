@@ -1,10 +1,9 @@
 import { useEffect, useState } from "react";
-import { homeService } from "../../service/Home/apiService";
-import { IData } from "../../shared/interface";
-import useGlobalStore from "../../store/useGlobalStore";
+import { homeService } from "../../service/Home/homeService";
+import useTestStore from "../../store/useTestStore";
 
 export const HomeComponent = () => {
-  const { apiMessage, setApiMessage } = useGlobalStore();
+  const { apiResponse, setApiResponse } = useTestStore();
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
@@ -12,7 +11,7 @@ export const HomeComponent = () => {
     try {
       const result = await homeService();
       console.log(result);
-      setApiMessage(result.message);
+      setApiResponse(result.message);
     } catch (error) {
       console.error(error);
       setError("Failed to fetch data");
@@ -27,7 +26,7 @@ export const HomeComponent = () => {
 
   return (
     <div className='flex flex-col'>
-      <h1> {apiMessage}</h1>
+      <h1> {apiResponse}</h1>
     </div>
   );
 };

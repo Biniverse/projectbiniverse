@@ -1,7 +1,6 @@
 // src/httpProvider.ts
 import axios, {
   AxiosInstance,
-  AxiosRequestConfig,
   AxiosResponse,
   AxiosError,
   InternalAxiosRequestConfig,
@@ -9,7 +8,7 @@ import axios, {
 
 const http: AxiosInstance = axios.create({
   // TODO: CHECK ENV FIRST IF IN DEV OR PROD AUTO SWITCH TO LOCALHOST IF IN DEV
-  baseURL: "http://localhost:8080",
+  baseURL: process.env.REACT_APP_API_URL,
   timeout: 10000,
   headers: {
     "Content-Type": "application/json",
@@ -21,6 +20,7 @@ http.interceptors.request.use(
   (config: InternalAxiosRequestConfig) => {
     //TODO: IMPLEMENT JWT TO ADD BEARER TOKEN
     // Example: config.headers.Authorization = `Bearer ${CEB-X-CAP TOKEN}`;
+    config.headers.TEST = "TEST YAWA";
     return config;
   },
   (error: AxiosError) => {

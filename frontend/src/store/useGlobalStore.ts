@@ -1,16 +1,16 @@
 import { create } from "zustand";
 import { persist } from "zustand/middleware";
 
-interface IApiResponse {
-  apiMessage: string;
-  setApiMessage: (apiMessage: string) => void;
+interface IGlobalState {
+  loading: boolean;
+  setIsLoading: (isLoading: boolean) => void;
 }
 
 const useGlobalStore = create(
-  persist<IApiResponse>(
+  persist<IGlobalState>(
     (set) => ({
-      apiMessage: "",
-      setApiMessage: (apiMessage: string) => set({ apiMessage }),
+      loading: true,
+      setIsLoading: (loading: boolean) => set({ loading }),
     }),
     {
       name: "basic-api-response",
