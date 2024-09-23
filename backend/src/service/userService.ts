@@ -6,20 +6,7 @@ export const getApiGreetings = () => {
   return message;
 };
 
-export const getUserByEmail = async (email: string) => {
-  try {
-    const user = await User.findOne({ email });
-    return user;
-  } catch (error) {
-    return null;
-  }
-};
+export const getUserByEmail = (email: string) => User.findOne({ email });
 
-export const createUser = async (values: Record<RegisterForm, string>) => {
-  try {
-    const user = await new User(values).save();
-    return user.toObject();
-  } catch (error) {
-    return null;
-  }
-};
+export const createUser = async (values: Record<RegisterForm, string>) =>
+  new User(values).save().then((user) => user.toObject());
