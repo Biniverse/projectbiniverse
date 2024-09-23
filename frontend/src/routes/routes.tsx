@@ -4,6 +4,7 @@ import { Home } from "../page/Home";
 import { NotFound } from "../shared/components/NotFound";
 import { ROUTES } from "../shared/enum";
 import { About } from "../page/About";
+import { Dashboard } from "../page/Dashboard";
 
 export const router = createBrowserRouter([
   {
@@ -17,5 +18,9 @@ export const router = createBrowserRouter([
   {
     path: ROUTES.NOT_FOUND,
     element: <NotFound />,
+  },
+  {
+    path: ROUTES.DASHBOARD,
+    element: <Dashboard />,
   },
 ]);

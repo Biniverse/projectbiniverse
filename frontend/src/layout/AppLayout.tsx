@@ -9,9 +9,8 @@ interface AppLayoutProps {
 export const AppLayout = ({ children }: AppLayoutProps) => {
   return (
     <>
-      <div className='flex flex-col min-h-screen px-4 md:px-0 py-2'>
-        <Header />
-        <main className='flex-grow pt-36 flex flex-col w-full h-full justify-center items-center'>
+      <div className="flex flex-col min-h-screen px-4 md:px-0 py-2">
+        <main className="flex-grow pt-12 flex flex-col w-full h-full justify-center items-center">
           {children}
         </main>
         <Footer />

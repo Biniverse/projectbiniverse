@@ -35,6 +35,12 @@ export const HomeComponent = () => {
       >
         About us
       </p>
+      <p
+        className="cursor-pointer text-center"
+        onClick={() => navigate(ROUTES.DASHBOARD)}
+      >
+        Dashboard
+      </p>
     </div>
   );
 };
