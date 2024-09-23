@@ -54,7 +54,7 @@ Before you begin, ensure you have the following installed:
    git clone https://github.com/Biniverse/projectbiniverse.git
    cd projectbiniverse
    ```
-2. On the root directory, install concurrently
+2. On the root directory (projectbiniverse), install concurrently
    ```bash
    npm install concurrently --save-dev
    ```
@@ -82,7 +82,7 @@ There are two ways to run the application, by concurrently to simulataneously ru
    ```
 2. To run frontend
    ```bash
-   npm start:backend
+   npm start:frontend
    ```
 
 ## Project Structure
@@ -94,6 +94,7 @@ There are two ways to run the application, by concurrently to simulataneously ru
     ├── routes/
     ├── services/
     ├── controllers/
+    ├── middleware/
     ├── helpers/
     ├── utils/
     ├── index.ts
