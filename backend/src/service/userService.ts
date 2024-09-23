@@ -8,5 +8,5 @@ export const getApiGreetings = () => {
 
 export const getUserByEmail = (email: string) => User.findOne({ email });
 
-export const createUser = async (values: Record<RegisterForm, string>) =>
+export const createUser = (values: Record<RegisterForm, string>) =>
   new User(values).save().then((user) => user.toObject());
