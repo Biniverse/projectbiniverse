@@ -5,37 +5,37 @@ const teamMembers: TeamMember[] = [
     name: "Edward Joseph A. Habon",
     role: "Fullstack Developer",
     bio: "Maybe we got lost in translation",
-    imageUrl: "/images/edward.jpg",
+    imageUrl: "assets/images/edward.jpg",
   },
   {
     name: "John Patrick Ryan D. Mandal",
     role: "Fullstack Developer",
     bio: "Maybe I asked for too much",
-    imageUrl: "/images/ptrck.jpg",
+    imageUrl: "assets/images/ptrck.jpg",
   },
   {
     name: "Ron Dave Fredrick N. Talledo",
     role: "Fullstack Developer",
     bio: "But maybe this thing was a masterpiece",
-    imageUrl: "/images/ron.jpg",
+    imageUrl: "assets/images/ron.jpg",
   },
   {
     name: "Stephen S. Abueva",
     role: "Fullstack Developer",
     bio: "til you tore it all up",
-    imageUrl: "/images/images.jpg",
+    imageUrl: "assets/images/images.jpg",
   },
   {
     name: "Jovany S. Opelina",
     role: "Fullstack Developer",
     bio: "Running scared, I was there",
-    imageUrl: "/images/jovany.jpg",
+    imageUrl: "assets/images/jovany.jpg",
   },
   {
     name: "Ester S. Hubahib",
     role: "Fullstack Developer",
     bio: "I remember it all too well",
-    imageUrl: "/images/images.jpg",
+    imageUrl: "assets/images/images.jpg",
   },
 ];
 
