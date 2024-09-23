@@ -9,8 +9,8 @@ module.exports = {
         poppins: ["Poppins", "sans-serif"],
       },
       backgroundImage: {
-        "custom-background": "url('/public/images/background.jpg')",
-        "custom-gradient": "linear-gradient(90deg, #1c1c1c 0%, #2b2b2b 100%)",
+        "color-gradient":
+          "linear-gradient(rgba(0, 96, 214, 0.87), rgba(8, 83, 196, 0.88), #04327c, #032459)",
       },
     },
   },
