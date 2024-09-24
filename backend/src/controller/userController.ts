@@ -1,7 +1,15 @@
 // src/services/helloService.ts
+import argon2 from "argon2";
 import { Request, Response } from "express";
-import { getApiGreetings } from "../service/userService";
-import User from "../model/userModel";
+import {
+  createUser,
+  getApiGreetings,
+  getUserByEmail,
+} from "../service/userService";
+import { USERMESSAGE } from "../shared/constants";
+import { IUser } from "../shared/interface";
+import { CreateUserSchema } from "../shared/validationSchemas";
+import { ROLES } from "../shared/enums";
 
 export const getHelloWorld = (req: Request, res: Response): void => {
   const message: string = getApiGreetings();
@@ -10,21 +18,34 @@ export const getHelloWorld = (req: Request, res: Response): void => {
   });
 };
 
-export const createUser = async (req: Request, res: Response) => {
-  const user = req.body;
+export const registerUser = async (req: Request, res: Response) => {
+  const user: IUser = req.body;
 
-  const newUser = new User(user);
+  try {
+    const validatedData = CreateUserSchema.safeParse(user);
+    if (!validatedData.success) {
+      return res.status(400).json(validatedData.error.issues);
+    }
+    const { firstName, lastName, contact, role } = user;
+    let email = user.email.toLowerCase();
+    const userExist = await getUserByEmail(email);
+    if (userExist)
+      return res.status(400).json({ error: USERMESSAGE.EXIST.EMAIL });
 
-  try{
-    await newUser.save();
-    res.status(201).json({
-      status: 201,
-      data: newUser
-    })
-  }catch(error){
-		res.status(500).json({
-      success: false, 
-      message: "Server Error" 
+    const hashedPassword = await argon2.hash(email); //EMAIL IS THE DEFAULT PASSWORD
+    await createUser({
+      firstName,
+      lastName,
+      email,
+      contact,
+      role: ROLES.EMPLOYEE,
+      password: hashedPassword,
     });
+    return res.status(201).json({
+      success: USERMESSAGE.SUCCESS.CREATED,
+    });
+  } catch (error) {
+    console.log(error);
+    return res.status(400).json(error);
   }
-}
+};
