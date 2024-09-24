@@ -5,6 +5,7 @@ import {
   createUser,
   getApiGreetings,
   getUserByEmail,
+  getAllUsers,
 } from "../service/userService";
 import { USERMESSAGE } from "../shared/constants";
 import { IUser } from "../shared/interface";
@@ -47,5 +48,18 @@ export const registerUser = async (req: Request, res: Response) => {
   } catch (error) {
     console.log(error);
     return res.status(400).json(error);
+  }
+};
+
+export const getUsers = async (req: Request, res: Response) => {
+  try {
+    const users: IUser[] = await getAllUsers();
+    if (users) {
+      res.status(200).json({
+        data: users,
+      });
+    }
+  } catch (error) {
+    res.status(400).json(error);
   }
 };
