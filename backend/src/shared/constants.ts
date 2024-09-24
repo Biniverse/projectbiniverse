@@ -25,3 +25,7 @@ export const USERMESSAGE = {
     EMAIL: "Email already exists",
   },
 };
+
+export const ERROR = {
+  LIMIT: "Too many requests, please try again after 15 minutes",
+};
