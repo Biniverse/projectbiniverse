@@ -46,7 +46,7 @@ export const AboutUsComponent = () => {
     <section className="mb-5">
       <div className="container mx-auto text-center">
         <h2 className="text-5xl font-extrabold text-gray-800 mb-8">
-          { commonConstant.MEET_THE_TEAM }
+          {commonConstant.MEET_THE_TEAM}
         </h2>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
