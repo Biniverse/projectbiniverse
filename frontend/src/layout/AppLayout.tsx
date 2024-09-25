@@ -10,11 +10,9 @@ export const AppLayout = ({ children }: AppLayoutProps) => {
   return (
     <>
       <div className="flex flex-col min-h-screen px-4 md:px-0 py-2">
-        <Header />
         <main className="flex-grow pt-36 flex flex-col w-full h-full items-center">
           {children}
         </main>
-        <Footer />
       </div>
     </>
   );
