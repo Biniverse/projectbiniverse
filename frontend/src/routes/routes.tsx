@@ -4,7 +4,7 @@ import { Home } from "../page/Home";
 import { NotFound } from "../shared/components/NotFound";
 import { ROUTES } from "../shared/enum";
 import { About } from "../page/About";
-import { Dashboard } from "../page/Dashboard";
+import { UserListComponent } from "../components/UserList/UserList";
 
 export const router = createBrowserRouter([
   {
@@ -15,6 +15,14 @@ export const router = createBrowserRouter([
     path: ROUTES.ABOUT_US,
     element: <About />,
   },
+  {
+    path: ROUTES.USER_LIST,
+    element: <UserListComponent />,
+  },
+  // {
+  //   path: ROUTES.ADD_USER,
+  //   element: <AddUser />,
+  // },
   {
     path: ROUTES.NOT_FOUND,
     element: <NotFound />,
