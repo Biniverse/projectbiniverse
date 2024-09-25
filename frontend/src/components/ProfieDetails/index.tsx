@@ -9,8 +9,8 @@ const ProfileDetailsComponent = () => {
         <p>BINI AIAH</p>
         <p>DEVELOPER</p>
         <hr />
-        <p>BINI AIAH</p>
-        <p>DEVELOPER</p>
+        <p>Lorem ipsum </p>
+        <p>Lorem ipsum dolor </p>
         <hr />
         <p>Time in: ----- 10</p>
         <p>DEVELOPER</p>
