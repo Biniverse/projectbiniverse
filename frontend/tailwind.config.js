@@ -7,6 +7,7 @@ module.exports = {
       fontFamily: {
         inter: ["Inter", "sans-serif"],
         poppins: ["Poppins", "sans-serif"],
+        syne: ["Syne", "sans-serif"],
       },
       backgroundImage: {
         "color-gradient":

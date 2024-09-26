@@ -6,6 +6,7 @@ import { ROUTES } from "../shared/enum";
 import { About } from "../page/About";
 import { UserListComponent } from "../components/UserList/UserList";
 import { Dashboard } from "../page/Dashboard";
+import { Login } from "../page/Login";
 
 export const router = createBrowserRouter([
   {
@@ -31,5 +32,9 @@ export const router = createBrowserRouter([
   {
     path: ROUTES.DASHBOARD,
     element: <Dashboard />,
+  },
+  {
+    path: ROUTES.LOGIN,
+    element: <Login />,
   },
 ]);
