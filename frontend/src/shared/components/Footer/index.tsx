@@ -12,7 +12,7 @@ const Footer = () => {
             { commonConstant.PRIVACY_POLICY }
           </a>{" "}
           |
-          <a href='#' className='hover:text-blue-700'>
+          <a href="#" className="hover:text-blue-700">
             {" "}
             { commonConstant.TERMS_OF_SERVICE }
           </a>

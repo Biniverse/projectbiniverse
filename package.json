@@ -19,5 +19,8 @@
   "devDependencies": {
     "concurrently": "^9.0.1",
     "prettier": "^3.3.3"
+  },
+  "dependencies": {
+    "@heroicons/react": "^2.1.5"
   }
 }
