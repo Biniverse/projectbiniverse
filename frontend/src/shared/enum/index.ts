@@ -11,4 +11,8 @@ export enum ROLES {
   APPROVER = "approver",
   EMPLOYEE = "employee",
 }
-  
+
+export enum TOAST_TYPE {
+  SUCCESS = "success",
+  ERROR = "error",
+}
