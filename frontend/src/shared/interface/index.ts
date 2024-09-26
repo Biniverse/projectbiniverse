@@ -22,6 +22,6 @@ export interface ISignUp {
 }
 
 export interface ISignUpResponse {
-  success: string; // Optional because it may not always be present
+  success: string;
   error?: string; // Optional to handle error cases
 }
