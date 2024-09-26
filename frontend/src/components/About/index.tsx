@@ -1,3 +1,4 @@
+import { CommonConstant } from "../../shared/constants/commonConstants";
 import { TeamMember } from "../../shared/types";
 
 const teamMembers: TeamMember[] = [
@@ -38,13 +39,14 @@ const teamMembers: TeamMember[] = [
     imageUrl: "assets/images/images.jpg",
   },
 ];
+const commonConstant = CommonConstant;
 
 export const AboutUsComponent = () => {
   return (
     <section className="mb-5">
       <div className="container mx-auto text-center">
         <h2 className="text-5xl font-extrabold text-gray-800 mb-8">
-          Meet the Team
+          {commonConstant.MEET_THE_TEAM}
         </h2>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">

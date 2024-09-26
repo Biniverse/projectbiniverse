@@ -1,16 +1,20 @@
+import { CommonConstant } from "../../constants/commonConstants";
+
 const Footer = () => {
+  const commonConstant = CommonConstant;
+
   return (
     <footer className=' text-black py-4'>
       <div className='container mx-auto text-center'>
-        <p className='text-sm'>© 2024 BiniVerse. All rights reserved.</p>
+        <p className='text-sm'>{ commonConstant.COPYRIGHT_TEXT }</p>
         <p className='text-sm'>
           <a href='#' className='hover:text-blue-700'>
-            Privacy Policy
+            { commonConstant.PRIVACY_POLICY }
           </a>{" "}
           |
-          <a href='#' className='hover:text-blue-700'>
+          <a href="#" className="hover:text-blue-700">
             {" "}
-            Terms of Service
+            { commonConstant.TERMS_OF_SERVICE }
           </a>
         </p>
       </div>
