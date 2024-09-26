@@ -1,15 +1,15 @@
 import React from "react";
 
-export const LoginComponent = () => {
+export const Signin = () => {
   return (
     <>
       <div className="flex justify-center px-6 py-12 lg:px-8 size-1/2 bg-white rounded-2xl my-32">
         <div className="sm:mx-100 sm:w-full sm:max-w-sm">
-          {/* <img
+          <img
             className="w-full h-full object-cover "
             src={"/images/loginAiah.jpg"}
             alt={"wwew"}
-          /> */}
+          />
         </div>
         <div className=" sm:mx-auto sm:w-full sm:max-w-sm pt-20">
           <h2 className="text-5xl text-blue-900 text-left font-syne font-bold whitespace-nowrap">
@@ -17,7 +17,7 @@ export const LoginComponent = () => {
           </h2>
           <h2 className="text-5xl text-blue-900 text-right my-10">10:10 PM</h2>
 
-          <form action="#" method="POST" className="space-y-6">
+          <form action="/signin" method="POST" className="space-y-6">
             <div>
               <div className="mt-2">
                 <input
@@ -43,9 +43,7 @@ export const LoginComponent = () => {
                   placeholder="Password"
                   required
                   autoComplete="current-password"
-                  //   className="block w-full rounded-md border-0 px-3 py-1.5 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:outline-none focus:ring focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                   className="block w-full rounded-xl border-0 px-3 py-2.5 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:outline-none focus:ring focus:ring-inset focus:ring-blue-900 sm:text-sm sm:leading-6"
-                  //   box-shadow: 0 0 0 2px rgba(79, 70, 229, 0.5);
                 />
               </div>
             </div>
