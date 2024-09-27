@@ -69,3 +69,7 @@ body::before {
   );
   pointer-events: none;
 }
+
+.text-shadow {
+  text-shadow: -5px 5px 0 rgba(56, 56, 56, 0.21);
+}
