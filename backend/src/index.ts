@@ -11,16 +11,15 @@ const app = express();
 const port = process.env.PORT || 8080;
 
 // Middleware
-// app.use(helmet());
+app.use(helmet());
 app.use(cors());
-// app.use(generalLimiter);
+app.use(generalLimiter);
 app.use(express.json());
-
+connectDB().catch((error) => console.error(error));
 // Routes
 app.use("/", userRouter);
 
 // Start server
 app.listen(port, () => {
-  connectDB();
   console.log(`Server is running on http://localhost:${port}`);
 });

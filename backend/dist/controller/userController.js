@@ -31,7 +31,7 @@ const registerUser = (req, res) => __awaiter(void 0, void 0, void 0, function* (
     try {
         const validatedData = validationSchemas_1.CreateUserSchema.safeParse(user);
         if (!validatedData.success) {
-            return res.status(400).json(validatedData.error.issues);
+            return res.status(400).json({ error: validatedData.error.issues });
         }
         const { firstName, lastName, contact, role } = user;
         let email = user.email.toLowerCase();

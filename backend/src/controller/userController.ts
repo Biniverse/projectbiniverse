@@ -25,7 +25,7 @@ export const registerUser = async (req: Request, res: Response) => {
   try {
     const validatedData = CreateUserSchema.safeParse(user);
     if (!validatedData.success) {
-      return res.status(400).json(validatedData.error.issues);
+      return res.status(400).json({ error: validatedData.error.issues });
     }
     const { firstName, lastName, contact, role } = user;
     let email = user.email.toLowerCase();
