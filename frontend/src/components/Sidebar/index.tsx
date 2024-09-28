@@ -17,6 +17,7 @@ export default function DrawerComponent() {
               <Sidebar.Item href="#">Log Request</Sidebar.Item>
             </Sidebar.Collapse>
             <Sidebar.Item href="#">Inbox</Sidebar.Item>
+            <Sidebar.Item href="/user-list">Users list</Sidebar.Item>
           </Sidebar.ItemGroup>
         </Sidebar.Items>
       </Sidebar>

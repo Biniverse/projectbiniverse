@@ -4,6 +4,9 @@ import {
   Dropdown,
   Pagination,
   FloatingLabel,
+  TableBody,
+  TableHead,
+  TableCell,
 } from "flowbite-react";
 import { useEffect, useState } from "react";
 import { IUser } from "../../../shared/interface";
@@ -15,11 +18,13 @@ import { ROUTES } from "../../../shared/enum";
 const UserTable = () => {
   const [users, setUsers] = useState<IUser[]>([]);
   const [currentPage, setCurrentPage] = useState(1);
-
   const [paginatedUser, setPaginatedUsers] = useState<IUser[]>([]);
   const [totalPages, setTotalPages] = useState<number>(1);
   const itemsDropDown = [5]; //TODO: COMEBACK HERE, TO ADD MULTIPLE CHOICES, SET TO 5 FOR NOW SINCE CARD COMPONENT IS NOT SCROLLABLE
   const [itemsPerPage, setItemsPerPage] = useState<number>(itemsDropDown[0]);
+  const [searchTerm, setSearchTerm] = useState<string>("");
+  const [debouncedSearchTerm, setDebouncedSearchTerm] = useState<string>("");
+
   const { navigate } = useNavigate();
   const handlePageChange = (page: number | string) => {
     if (page === "...") return;
@@ -40,14 +45,35 @@ const UserTable = () => {
   };
 
   useEffect(() => {
-    setPaginatedUsers(() => {
-      return users.slice(
-        (currentPage - 1) * itemsPerPage,
-        currentPage * itemsPerPage
-      );
-    });
-  }, [users, currentPage, itemsPerPage, totalPages]);
+    const filteredUsers = users.filter((user) =>
+      `${user.firstName} ${user.lastName}`
+        .toLowerCase()
+        .includes(debouncedSearchTerm.toLowerCase())
+    );
+    const totalPageCount = Math.ceil(filteredUsers.length / itemsPerPage);
+    setTotalPages(totalPageCount);
+    if (currentPage > totalPageCount) {
+      setCurrentPage(1);
+    }
+    const paginated = filteredUsers.slice(
+      (currentPage - 1) * itemsPerPage,
+      currentPage * itemsPerPage
+    );
+    setPaginatedUsers(paginated);
+  }, [users, debouncedSearchTerm, currentPage, itemsPerPage, totalPages]);
 
+  // USEEFFECT TO WATCH SEARCH TERM
+  useEffect(() => {
+    const searchHandler = setTimeout(() => {
+      setDebouncedSearchTerm(searchTerm);
+    }, 500);
+
+    return () => {
+      clearTimeout(searchHandler);
+    };
+  }, [searchTerm]);
+
+  // USEEFFECT TO UPDATE TOTAL PAGE COUNT
   useEffect(() => {
     const totalPageCount = Math.ceil(users.length / itemsPerPage);
     setTotalPages(totalPageCount);
@@ -69,6 +95,8 @@ const UserTable = () => {
           variant="filled"
           label="Search Employee"
           className="rounded-xl"
+          value={searchTerm}
+          onChange={(e) => setSearchTerm(e.target.value)}
         />
         <Button color={"blue"} onClick={() => navigate(ROUTES.ADD_USER)}>
           Add Employee
@@ -76,7 +104,7 @@ const UserTable = () => {
       </div>
 
       <div className="overflow-x-auto">
-        <Table striped={true} className="w-full">
+        <Table striped className="w-full">
           <Table.Head>
             <Table.HeadCell>Id</Table.HeadCell>
             <Table.HeadCell>Name</Table.HeadCell>
@@ -85,17 +113,25 @@ const UserTable = () => {
             <Table.HeadCell>Contact</Table.HeadCell>
           </Table.Head>
           <Table.Body>
-            {paginatedUser.map((user: IUser, index: number) => (
-              <Table.Row className="bg-white" key={index}>
-                <Table.Cell>{user.employeeId}</Table.Cell>
-                <Table.Cell>
-                  {toUpperCase(`${user.firstName} ${user.lastName}`)}
+            {paginatedUser.length > 0 ? (
+              paginatedUser.map((user: IUser, index: number) => (
+                <Table.Row className="bg-white" key={index}>
+                  <Table.Cell>{user.employeeId}</Table.Cell>
+                  <Table.Cell>
+                    {toUpperCase(`${user.firstName} ${user.lastName}`)}
+                  </Table.Cell>
+                  <Table.Cell>{toUpperCase(user.role)}</Table.Cell>
+                  <Table.Cell>{user.email}</Table.Cell>
+                  <Table.Cell>{user.contact}</Table.Cell>
+                </Table.Row>
+              ))
+            ) : (
+              <Table.Row className="bg-white">
+                <Table.Cell className="text-center" colSpan={5}>
+                  No data available
                 </Table.Cell>
-                <Table.Cell>{toUpperCase(user.role)}</Table.Cell>
-                <Table.Cell>{user.email}</Table.Cell>
-                <Table.Cell>{user.contact}</Table.Cell>
               </Table.Row>
-            ))}
+            )}
           </Table.Body>
         </Table>
       </div>

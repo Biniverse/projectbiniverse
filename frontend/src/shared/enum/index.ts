@@ -3,7 +3,7 @@ export enum ROUTES {
   NOT_FOUND = "*",
   ABOUT_US = "/about-us",
   USER_LIST = "/user-list",
-  ADD_USER = "/add-user",
+  ADD_USER = "/sign-up",
   DASHBOARD = "/dashboard",
 }
 export enum ROLES {

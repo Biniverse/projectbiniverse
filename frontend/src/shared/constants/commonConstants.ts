@@ -15,7 +15,7 @@ export class CommonConstant {
       FIRST_NAME: "First Name is required",
       LAST_NAME: "Last Name is required",
       CONTACT_NO: "Contact No. is required",
-      CONTACT_NO_LENGTH: "Minimum of 11 digits",
+      CONTACT_NO_LENGTH: "Contact Number should be 11 digits",
       EMAIL: "Email is required",
       INVALID_EMAIL: "Invalid email address",
     },

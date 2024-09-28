@@ -11,7 +11,7 @@ import axios from "axios";
 import ToastComponent from "../../shared/components/CustomToast";
 import { TOAST_TYPE } from "../../shared/enum";
 
-export const SignUp = () => {
+export const SignUpComponent = () => {
   const {
     register,
     handleSubmit,
@@ -95,14 +95,24 @@ export const SignUp = () => {
             <FloatingLabel
               variant="filled"
               label={
-                errors.contact
+                errors.contact?.type === "required"
                   ? CommonConstant.FORM.SIGN_UP_ERROR.CONTACT_NO
-                  : CommonConstant.FORM.SIGN_UP.CONTACT_NO
+                  : errors.contact?.type === "minLength" ||
+                      errors.contact?.type === "maxLength"
+                    ? CommonConstant.FORM.SIGN_UP_ERROR.CONTACT_NO_LENGTH
+                    : CommonConstant.FORM.SIGN_UP.CONTACT_NO
               }
               type="number"
               {...register("contact", {
                 required: true,
-                minLength: 11,
+                minLength: {
+                  value: 11,
+                  message: CommonConstant.FORM.SIGN_UP_ERROR.CONTACT_NO_LENGTH,
+                },
+                maxLength: {
+                  value: 11,
+                  message: CommonConstant.FORM.SIGN_UP_ERROR.CONTACT_NO_LENGTH,
+                },
               })}
               className={`${errors.contact ? "border-red-500 text-red-500" : "border-gray-300"}`}
             />
@@ -110,15 +120,17 @@ export const SignUp = () => {
             <FloatingLabel
               variant="filled"
               label={
-                errors.email
+                errors.email?.type === "required"
                   ? CommonConstant.FORM.SIGN_UP_ERROR.EMAIL
-                  : CommonConstant.FORM.SIGN_UP.EMAIL
+                  : errors.email?.type === "pattern"
+                    ? CommonConstant.FORM.SIGN_UP_ERROR.INVALID_EMAIL
+                    : CommonConstant.FORM.SIGN_UP.EMAIL
               }
               {...register("email", {
                 required: "Email is required",
                 pattern: {
                   value: CommonConstant.REGEX_PATTERNS.EMAIL_PATTERN,
-                  message: "Invalid email format",
+                  message: CommonConstant.FORM.SIGN_UP_ERROR.INVALID_EMAIL,
                 },
               })}
               className={`${

@@ -4,9 +4,10 @@ import { Home } from "../page/Home";
 import { NotFound } from "../shared/components/NotFound";
 import { ROUTES } from "../shared/enum";
 import { About } from "../page/About";
-import { UserListComponent } from "../components/UserList/UserList";
+
 import { Dashboard } from "../page/Dashboard";
-import { SignUp } from "../components/SignUp/SignUp";
+import { UserList } from "../page/UserList";
+import { SignUp } from "../page/SignUp";
 
 export const router = createBrowserRouter([
   {
@@ -19,7 +20,7 @@ export const router = createBrowserRouter([
   },
   {
     path: ROUTES.USER_LIST,
-    element: <UserListComponent />,
+    element: <UserList />,
   },
   {
     path: ROUTES.ADD_USER,
