@@ -11,9 +11,9 @@ const app = express();
 const port = process.env.PORT || 8080;
 
 // Middleware
-// app.use(helmet());
+app.use(helmet());
 app.use(cors());
-// app.use(generalLimiter);
+app.use(generalLimiter);
 app.use(express.json());
 
 // Routes

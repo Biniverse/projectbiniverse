@@ -13,3 +13,15 @@ export interface IUser {
   role: ROLES;
   employeeId: number;
 }
+
+export interface ISignUp {
+  firstName: string;
+  lastName: string;
+  contact: number;
+  email: string;
+}
+
+export interface ISignUpResponse {
+  success: string;
+  error?: string; // Optional to handle error cases
+}

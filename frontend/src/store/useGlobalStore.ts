@@ -6,15 +6,8 @@ interface IGlobalState {
   setIsLoading: (isLoading: boolean) => void;
 }
 
-const useGlobalStore = create(
-  persist<IGlobalState>(
-    (set) => ({
-      loading: true,
-      setIsLoading: (loading: boolean) => set({ loading }),
-    }),
-    {
-      name: "basic-api-response",
-    }
-  )
-);
+const useGlobalStore = create<IGlobalState>((set) => ({
+  loading: false,
+  setIsLoading: (loading: boolean) => set({ loading }),
+}));
 export default useGlobalStore;
