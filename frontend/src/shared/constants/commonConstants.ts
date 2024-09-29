@@ -25,5 +25,10 @@ export class CommonConstant {
       CONTACT_NO: "Contact",
       EMAIL: "Email",
     },
+    SIGN_IN: {
+      GOOD_EVENING: "Good Evening!",
+      FORGOT_PASSOWRD: "Forgot Password!",
+      LOGIN: "Login",
+    },
   };
 }
