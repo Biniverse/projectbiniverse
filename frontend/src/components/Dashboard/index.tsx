@@ -5,7 +5,7 @@ import DrawerComponent from "../Sidebar";
 import AnnouncementComponent from "../Announcement";
 import ProfileDetailsComponent from "../ProfieDetails";
 import { CardComponent } from "../../shared/components/CardNav";
-import { TimeLogsComponent } from "../TimeLogs";
+import { CalendarComponent } from "../Calendar";
 import { CommonConstant } from "../../shared/constants/commonConstants";
 
 const DashboardComponent = () => {
@@ -24,7 +24,7 @@ const DashboardComponent = () => {
         <ProfileDetailsComponent />
         <AnnouncementComponent />
         {/* <Datepicker inline /> */}
-        <TimeLogsComponent
+        <CalendarComponent
           isCalendarOnly={false}
           logData={commonConstant.MOCK_DATA_TIME_LOGS}
         />
