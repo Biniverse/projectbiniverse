@@ -9,50 +9,62 @@ export class CommonConstant {
   public static readonly DAYS_OF_WEEK = ["SUN", "MON", "TUE", "WED", "THU", "FRI", "SAT"];
   public static readonly MONTHS = [
     {
+      index: 1,
       name: "January",
       initial: "Jan"
     },
     {
+      index: 2,
       name: "February",
       initial: "Feb"
     },
     {
+      index: 3,
       name: "March",
       initial: "Mar"
     },
     {
+      index: 5,
       name: "April",
       initial: "Apr"
     },
     {
+      index: 5,
       name: "May",
       initial: "May"
     },
     {
+      index: 6,
       name: "June",
       initial: "Jun"
     },
     {
+      index: 7,
       name: "July",
       initial: "Jul"
     },
     {
+      index: 8,
       name: "August",
       initial: "Aug"
     },
     {
+      index: 9,
       name: "September",
-      initial: "Sep"
+      initial: "Sept"
     },
     {
+      index: 10,
       name: "October",
       initial: "Oct"
     },
     {
+      index: 11,
       name: "November",
       initial: "Nov"
     },
     {
+      index: 12,
       name: "December",
       initial: "Dec"
     }
