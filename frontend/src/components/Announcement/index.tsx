@@ -1,33 +1,50 @@
-import { Button, Card } from "flowbite-react";
+import { Button, Card, Carousel, Datepicker } from "flowbite-react";
 import React from "react";
 
 const AnnouncementComponent = () => {
   return (
-    <div>
-      <Card className="flex flex-col items-start w-auto place-self-start pt-4 pr-4 pl-4">
-        <h5 className="text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
-          Noteworthy technology acquisitions 2021
-        </h5>
-        <p className="font-normal text-gray-700 dark:text-gray-400">
-          Here are the biggest enterprise technology acquisitions of 2021 so
-          far, in reverse chronological order.
-        </p>
-        <Button>
-          Read more
-          <svg
-            className="-mr-1 ml-2 h-4 w-4"
-            fill="currentColor"
-            viewBox="0 0 20 20"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <path
-              fillRule="evenodd"
-              d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z"
-              clipRule="evenodd"
+    <div className="flex flex-col justify-between items-start gap-4 w-full">
+      <div className="flex flex-row items-end justify-between">
+        <div className="w-auto flex items-start flex-col">
+          <div className="text-[22px] font-semibold dark:text-white">
+            Good morning, User!
+          </div>
+          <h3 className="dark:text-white text-h3">Announcements</h3>
+        </div>
+        <span></span>
+      </div>
+      <div className="flex flex-row gap-4 h-[45vh] w-full">
+        <Carousel>
+          <div className="object-cover">
+            <img
+              src="../assets/images/jovany.jpg"
+              className="object-cover object-top"
+              alt=""
             />
-          </svg>
-        </Button>
-      </Card>
+          </div>
+          <div className="object-cover">
+            <img src="../assets/images/edward.jpg" className="" alt="" />
+          </div>
+          <div className="flex items-center justify-center">
+            <img src="../assets/images/ptrck.jpg" className="" alt="" />
+          </div>
+          <div className="flex items-center justify-center">
+            <img src="../assets/images/ron.jpg" className="" alt="" />
+          </div>
+
+          <div className="">
+            <img src="../assets/images/stephen.jpg" className="" alt="" />
+          </div>
+          <div className="">
+            <img src="../assets/images/images.jpg" className="" alt="" />
+          </div>
+        </Carousel>
+        {/* <div className=" p-4 rounded-[10px] self-stretch w-[450px] items-end z-30">
+          <div>September 2024</div>
+          <Datepicker inline />
+          <div>Birthdys</div>
+        </div> */}
+      </div>
     </div>
   );
 };
