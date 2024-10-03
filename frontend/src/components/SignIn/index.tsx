@@ -4,8 +4,12 @@ import { Carousel, FloatingLabel } from "flowbite-react";
 import { CommonConstant } from "../../shared/constants/commonConstants";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { ISignIn } from "../../shared/interface";
-import { TOAST_TYPE } from "../../shared/enum";
+import { ROUTES, TOAST_TYPE } from "../../shared/enum";
 import ToastComponent from "../../shared/components/CustomToast";
+import { BINI } from "../../shared/constants/biniImages";
+import useGlobalStore from "../../store/useGlobalStore";
+import axios from "axios";
+import { redirect, useNavigate } from "react-router-dom";
 
 export const Signin = () => {
   const {
@@ -14,46 +18,59 @@ export const Signin = () => {
     reset,
     formState: { errors },
   } = useForm<ISignIn>();
+
   const [toastVisible, setToastVisible] = useState<boolean>(false);
   const [toastMessage, setToastMessage] = useState<string>("");
   const [toastType, setToastType] = useState<TOAST_TYPE>(TOAST_TYPE.ERROR);
+  const navigate = useNavigate();
 
   const onSubmit: SubmitHandler<ISignIn> = async (data: ISignIn) => {
     try {
       const { success } = await signInService(data);
-
+      console.log(data);
       if (success) {
         reset();
         setToastMessage(success);
         setToastType(TOAST_TYPE.SUCCESS);
         setToastVisible(true);
+        setTimeout(() => {
+          navigate(ROUTES.DASHBOARD);
+        }, 3000);
       }
     } catch (error) {
-      throw error;
+      if (axios.isAxiosError(error)) {
+        const backendError = error.response;
+        if (backendError) {
+          const errorMessages = backendError.data.error;
+          if (Array.isArray(errorMessages)) {
+            const messageList = errorMessages
+              .map((error) => error.message)
+              .join(", ");
+            setToastMessage(messageList);
+            setToastType(TOAST_TYPE.ERROR);
+          } else {
+            setToastMessage(errorMessages);
+            setToastType(TOAST_TYPE.ERROR);
+          }
+          setToastVisible(true);
+          setTimeout(() => {
+            setToastVisible(false);
+          }, 5000);
+        } else {
+          console.error("Error without response:", error.message);
+        }
+      } else {
+        console.error("Unexpected error:", error);
+      }
     }
   };
-
-  const bini = [
-    {
-      altName: "Aiah",
-      imageUrl: "/images/loginAiah.jpg",
-    },
-    {
-      altName: "Gwen",
-      imageUrl: "/images/loginGwen.jpg",
-    },
-    {
-      altName: "Jhoanna",
-      imageUrl: "/images/loginJhoanna.jpg",
-    },
-  ];
 
   return (
     <>
       <div className="flex justify-center px-6 py-12 lg:px-8 size-1/2 bg-white rounded-2xl my-32">
         <div className="sm:mx-100 sm:w-full sm:max-w-sm h-[600px]">
           <Carousel>
-            {bini.map((bini, index) => (
+            {BINI.map((bini, index) => (
               <img
                 key={index}
                 className="w-full h-full object-cover"
@@ -92,6 +109,7 @@ export const Signin = () => {
               <div>
                 <FloatingLabel
                   variant="filled"
+                  type="password"
                   label={
                     errors.password
                       ? CommonConstant.FORM.SIGN_IN_ERROR.PASSWORD
