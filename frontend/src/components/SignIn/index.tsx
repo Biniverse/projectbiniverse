@@ -1,16 +1,33 @@
 import React, { useState } from "react";
 import { signInService } from "../../service/SignIn/signInService";
-import { Carousel } from "flowbite-react";
+import { Carousel, FloatingLabel } from "flowbite-react";
 import { CommonConstant } from "../../shared/constants/commonConstants";
+import { SubmitHandler, useForm } from "react-hook-form";
+import { ISignIn } from "../../shared/interface";
+import { TOAST_TYPE } from "../../shared/enum";
+import ToastComponent from "../../shared/components/CustomToast";
 
 export const Signin = () => {
-  const [username, setUsername] = useState<string>("");
-  const [password, setPassword] = useState<string>("");
+  const {
+    register,
+    handleSubmit,
+    reset,
+    formState: { errors },
+  } = useForm<ISignIn>();
+  const [toastVisible, setToastVisible] = useState<boolean>(false);
+  const [toastMessage, setToastMessage] = useState<string>("");
+  const [toastType, setToastType] = useState<TOAST_TYPE>(TOAST_TYPE.ERROR);
 
-  const handleSubmit = async () => {
+  const onSubmit: SubmitHandler<ISignIn> = async (data: ISignIn) => {
     try {
-      const data = await signInService(username, password);
-      return data;
+      const { success } = await signInService(data);
+
+      if (success) {
+        reset();
+        setToastMessage(success);
+        setToastType(TOAST_TYPE.SUCCESS);
+        setToastVisible(true);
+      }
     } catch (error) {
       throw error;
     }
@@ -31,8 +48,6 @@ export const Signin = () => {
     },
   ];
 
-  const commonConstant = CommonConstant;
-
   return (
     <>
       <div className="flex justify-center px-6 py-12 lg:px-8 size-1/2 bg-white rounded-2xl my-32">
@@ -50,25 +65,24 @@ export const Signin = () => {
         </div>
         <div className=" sm:mx-auto sm:w-full sm:max-w-sm pt-20">
           <h2 className="text-5xl text-blue-700 text-left font-syne font-bold whitespace-nowrap text-shadow">
-            {commonConstant.FORM.SIGN_IN.GOOD_EVENING}
+            {CommonConstant.FORM.SIGN_IN.GOOD_EVENING}
           </h2>
           <h2 className="text-5xl text-blue-700 text-right my-10 text-shadow">
             10:10 PM
           </h2>
 
-          <form onSubmit={handleSubmit} className="space-y-6">
+          <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
             <div>
-              <div className="mt-2">
-                <input
-                  id="username"
-                  name="username"
-                  type="text"
-                  placeholder="Username"
-                  required
-                  onChange={(e) => setUsername(e.target.value)}
-                  className="w-full rounded-xl border-0 px-3 py-2.5 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:outline-none focus:ring focus:ring-inset focus:ring-blue-900 sm:text-sm sm:leading-6"
-                />
-              </div>
+              <FloatingLabel
+                variant="filled"
+                label={
+                  errors.email
+                    ? CommonConstant.FORM.SIGN_IN_ERROR.EMAIL
+                    : CommonConstant.FORM.SIGN_IN.EMAIL
+                }
+                {...register("email", { required: true })}
+                className={`rounded-xl ${errors.email ? "border-red-500 text-red-500" : "border-gray-300"}`}
+              />
             </div>
 
             <div>
@@ -76,15 +90,15 @@ export const Signin = () => {
                 <div className="text-sm"></div>
               </div>
               <div>
-                <input
-                  id="password"
-                  name="password"
-                  type="password"
-                  placeholder="Password"
-                  required
-                  onChange={(e) => setPassword(e.target.value)}
-                  autoComplete="current-password"
-                  className="block w-full rounded-xl border-0 px-3 py-2.5 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:outline-none focus:ring focus:ring-inset focus:ring-blue-900 sm:text-sm sm:leading-6"
+                <FloatingLabel
+                  variant="filled"
+                  label={
+                    errors.password
+                      ? CommonConstant.FORM.SIGN_IN_ERROR.PASSWORD
+                      : CommonConstant.FORM.SIGN_IN.PASSWORD
+                  }
+                  {...register("password", { required: true })}
+                  className={`rounded-xl ${errors.password ? "border-red-500 text-red-500" : "border-gray-300"}`}
                 />
               </div>
             </div>
@@ -93,7 +107,7 @@ export const Signin = () => {
                 href="google.com"
                 className="font-semibold leading-6 text-blue-900 hover:text-blue-400"
               >
-                {commonConstant.FORM.SIGN_IN.FORGOT_PASSOWRD}
+                {CommonConstant.FORM.SIGN_IN.FORGOT_PASSOWRD}
               </a>
             </p>
 
@@ -102,11 +116,17 @@ export const Signin = () => {
                 type="submit"
                 className="flex w-full justify-center rounded-md bg-blue-900 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-blue-700 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
               >
-                {commonConstant.FORM.SIGN_IN.LOGIN}
+                {CommonConstant.FORM.SIGN_IN.LOGIN}
               </button>
             </div>
           </form>
         </div>
+        <ToastComponent
+          message={toastMessage}
+          type={toastType}
+          visible={toastVisible}
+          onDismiss={() => setToastVisible(false)}
+        />
       </div>
     </>
   );

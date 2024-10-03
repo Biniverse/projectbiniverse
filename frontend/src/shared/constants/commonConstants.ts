@@ -29,6 +29,12 @@ export class CommonConstant {
       GOOD_EVENING: "Good Evening!",
       FORGOT_PASSOWRD: "Forgot Password!",
       LOGIN: "Login",
+      EMAIL: "Email",
+      PASSWORD: "Password",
+    },
+    SIGN_IN_ERROR: {
+      EMAIL: "Email is required",
+      PASSWORD: "Password is required",
     },
   };
 }
