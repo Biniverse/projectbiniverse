@@ -4,10 +4,5 @@ import { CardComponent } from "../../shared/components/CardNav";
 import DrawerComponent from "../Sidebar";
 
 export const UserListComponent = () => {
-  return (
-    <CardComponent>
-      <DrawerComponent />
-      <UserTable />
-    </CardComponent>
-  );
+  return <UserTable />;
 };
