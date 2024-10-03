@@ -37,7 +37,7 @@ export const CardComponent = ({ children }: CardComponentProps) => {
             {/* profile avatar */}
             <ProfileComponent />
           </div>
-          <div className="flex flex-row items-center w-full h-screen  pb-4 bg-[#f4f4f4]">
+          <div className="flex flex-row items-center w-full h-screen  pb-4 bg-[#f4f4f4] dark:bg-darkmode">
             {children}
           </div>
         </div>
