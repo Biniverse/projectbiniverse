@@ -37,7 +37,7 @@ export const Signin = () => {
         setToastVisible(true);
         setTimeout(() => {
           navigate(ROUTES.DASHBOARD);
-        }, 3000);
+        }, 1500);
       }
     } catch (error) {
       if (axios.isAxiosError(error)) {
