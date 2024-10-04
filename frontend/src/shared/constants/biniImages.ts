@@ -1,4 +1,4 @@
-export const BINI = [
+export const LOGIN_CAROUSEL_IMAGES = [
   {
     altName: "Aiah",
     imageUrl: "/images/loginAiah.jpg",

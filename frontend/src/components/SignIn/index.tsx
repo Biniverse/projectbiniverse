@@ -6,7 +6,7 @@ import { SubmitHandler, useForm } from "react-hook-form";
 import { ISignIn } from "../../shared/interface";
 import { ROUTES, TOAST_TYPE } from "../../shared/enum";
 import ToastComponent from "../../shared/components/CustomToast";
-import { BINI } from "../../shared/constants/biniImages";
+import { LOGIN_CAROUSEL_IMAGES } from "../../shared/constants/biniImages";
 import useGlobalStore from "../../store/useGlobalStore";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
@@ -70,7 +70,7 @@ export const Signin = () => {
       <div className="flex justify-center px-6 py-12 lg:px-8 size-1/2 bg-white rounded-2xl my-32">
         <div className="sm:mx-100 sm:w-full sm:max-w-sm h-[600px]">
           <Carousel>
-            {BINI.map((bini, index) => (
+            {LOGIN_CAROUSEL_IMAGES.map((bini, index) => (
               <img
                 key={index}
                 className="w-full h-full object-cover"
