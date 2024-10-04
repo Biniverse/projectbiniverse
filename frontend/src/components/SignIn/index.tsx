@@ -9,13 +9,14 @@ import ToastComponent from "../../shared/components/CustomToast";
 import { BINI } from "../../shared/constants/biniImages";
 import useGlobalStore from "../../store/useGlobalStore";
 import axios from "axios";
-import { redirect, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 export const Signin = () => {
   const {
     register,
     handleSubmit,
     reset,
+    setError,
     formState: { errors },
   } = useForm<ISignIn>();
 
@@ -25,9 +26,10 @@ export const Signin = () => {
   const navigate = useNavigate();
 
   const onSubmit: SubmitHandler<ISignIn> = async (data: ISignIn) => {
+    console.log(data);
     try {
       const { success } = await signInService(data);
-      console.log(data);
+
       if (success) {
         reset();
         setToastMessage(success);
@@ -41,26 +43,24 @@ export const Signin = () => {
       if (axios.isAxiosError(error)) {
         const backendError = error.response;
         if (backendError) {
-          const errorMessages = backendError.data.error;
-          if (Array.isArray(errorMessages)) {
-            const messageList = errorMessages
-              .map((error) => error.message)
-              .join(", ");
-            setToastMessage(messageList);
+          if (!backendError.data.userExist) {
+            // Sample if user exists or not
+            setToastMessage(backendError.data.error);
             setToastType(TOAST_TYPE.ERROR);
+            setError("email", {
+              type: "manual",
+              message: backendError.data.error,
+            });
           } else {
-            setToastMessage(errorMessages);
+            setToastMessage(backendError.data.error);
             setToastType(TOAST_TYPE.ERROR);
+            setError("password", {
+              type: "manual",
+              message: backendError.data.error,
+            });
           }
           setToastVisible(true);
-          setTimeout(() => {
-            setToastVisible(false);
-          }, 5000);
-        } else {
-          console.error("Error without response:", error.message);
         }
-      } else {
-        console.error("Unexpected error:", error);
       }
     }
   };
@@ -92,12 +92,9 @@ export const Signin = () => {
             <div>
               <FloatingLabel
                 variant="filled"
-                label={
-                  errors.email
-                    ? CommonConstant.FORM.SIGN_IN_ERROR.EMAIL
-                    : CommonConstant.FORM.SIGN_IN.EMAIL
-                }
-                {...register("email", { required: true })}
+                label="Email"
+                {...register("email", { required: "Email is required" })}
+                helperText={errors.email?.message}
                 className={`rounded-xl ${errors.email ? "border-red-500 text-red-500" : "border-gray-300"}`}
               />
             </div>
@@ -110,12 +107,11 @@ export const Signin = () => {
                 <FloatingLabel
                   variant="filled"
                   type="password"
-                  label={
-                    errors.password
-                      ? CommonConstant.FORM.SIGN_IN_ERROR.PASSWORD
-                      : CommonConstant.FORM.SIGN_IN.PASSWORD
-                  }
-                  {...register("password", { required: true })}
+                  label="Password"
+                  {...register("password", {
+                    required: "Password is required",
+                  })}
+                  helperText={errors.password?.message}
                   className={`rounded-xl ${errors.password ? "border-red-500 text-red-500" : "border-gray-300"}`}
                 />
               </div>
