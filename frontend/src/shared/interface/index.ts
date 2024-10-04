@@ -25,3 +25,13 @@ export interface ISignUpResponse {
   success: string;
   error?: string; // Optional to handle error cases
 }
+
+export interface ISignIn {
+  email: string;
+  password: string;
+}
+
+export interface ISignInResponse {
+  success: string;
+  error?: string; // Optional to handle error cases
+}
