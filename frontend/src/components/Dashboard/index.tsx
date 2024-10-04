@@ -5,6 +5,8 @@ import DrawerComponent from "../Sidebar";
 import AnnouncementComponent from "../Announcement";
 import ProfileDetailsComponent from "../ProfieDetails";
 import { CardComponent } from "../../shared/components/CardNav";
+import { CalendarComponent } from "../Calendar";
+import { CommonConstant } from "../../shared/constants/commonConstants";
 
 const DashboardComponent = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -12,11 +14,18 @@ const DashboardComponent = () => {
   const toggleDrawer = () => {
     setIsOpen(!isOpen);
   };
+
+  const commonConstant = CommonConstant;
+
   return (
     <>
       <ProfileDetailsComponent />
       <AnnouncementComponent />
-      <Datepicker inline />
+      {/* <Datepicker inline /> */}
+      <CalendarComponent
+        isCalendarOnly={false}
+        logData={commonConstant.MOCK_DATA_TIME_LOGS}
+      />
     </>
   );
 };
