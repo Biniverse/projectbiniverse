@@ -1,4 +1,5 @@
 export const LOGIN_CAROUSEL_IMAGES = [
+  //Image Source: https://ph.pinterest.com/alyy_tonchi/bini-wallpapers/
   {
     altName: "Aiah",
     imageUrl: "/images/loginAiah.jpg",
