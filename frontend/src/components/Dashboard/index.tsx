@@ -19,16 +19,13 @@ const DashboardComponent = () => {
 
   return (
     <>
-      <CardComponent>
-        <DrawerComponent />
-        <ProfileDetailsComponent />
-        <AnnouncementComponent />
-        {/* <Datepicker inline /> */}
-        <CalendarComponent
-          isCalendarOnly={false}
-          logData={commonConstant.MOCK_DATA_TIME_LOGS}
-        />
-      </CardComponent>
+      <ProfileDetailsComponent />
+      <AnnouncementComponent />
+      {/* <Datepicker inline /> */}
+      <CalendarComponent
+        isCalendarOnly={false}
+        logData={commonConstant.MOCK_DATA_TIME_LOGS}
+      />
     </>
   );
 };
