@@ -9,8 +9,28 @@ import { Dashboard } from "../page/Dashboard";
 import { UserList } from "../page/UserList";
 import { SignUp } from "../page/SignUp";
 import { Signin } from "../components/SignIn";
+import ProtectedLayout from "../layout/ProtectedLayout";
 
 export const router = createBrowserRouter([
+  {
+    element: <ProtectedLayout />,
+    errorElement: <NotFound />,
+    children: [
+      {
+        path: ROUTES.DASHBOARD,
+        element: <Dashboard />,
+      },
+      {
+        path: ROUTES.USER_LIST,
+        element: <UserList />,
+      },
+      {
+        path: ROUTES.ADD_USER,
+        element: <SignUp />,
+      },
+    ],
+  },
+  // PUBLIC
   {
     path: ROUTES.HOME,
     element: <Home />,
@@ -18,14 +38,6 @@ export const router = createBrowserRouter([
   {
     path: ROUTES.ABOUT_US,
     element: <About />,
-  },
-  {
-    path: ROUTES.USER_LIST,
-    element: <UserList />,
-  },
-  {
-    path: ROUTES.ADD_USER,
-    element: <SignUp />,
   },
   {
     path: ROUTES.NOT_FOUND,

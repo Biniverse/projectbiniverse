@@ -14,12 +14,9 @@ const DashboardComponent = () => {
   };
   return (
     <>
-      <CardComponent>
-        <DrawerComponent />
-        <ProfileDetailsComponent />
-        <AnnouncementComponent />
-        <Datepicker inline />
-      </CardComponent>
+      <ProfileDetailsComponent />
+      <AnnouncementComponent />
+      <Datepicker inline />
     </>
   );
 };
