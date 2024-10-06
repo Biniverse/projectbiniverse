@@ -9,3 +9,8 @@ export interface IUser {
   password: string;
   role: ROLES;
 }
+
+export interface ILogin {
+  username_email: string;
+  password: string;
+}

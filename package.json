@@ -21,6 +21,8 @@
     "prettier": "^3.3.3"
   },
   "dependencies": {
-    "@heroicons/react": "^2.1.5"
+    "@heroicons/react": "^2.1.5",
+    "@types/express-session": "^1.18.0",
+    "express-session": "^1.18.0"
   }
 }
