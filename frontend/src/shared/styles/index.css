@@ -2,6 +2,7 @@
 @tailwind components;
 @tailwind utilities;
 @import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Syne:wght@400..800&display=swap");
 
 html {
   scroll-behavior: smooth;
@@ -78,4 +79,8 @@ input[type="number"]::-webkit-outer-spin-button {
 
 input[type="number"] {
   -moz-appearance: textfield; /* Firefox */
+}
+
+.text-shadow {
+  text-shadow: -5px 5px 0 rgba(56, 56, 56, 0.21);
 }
