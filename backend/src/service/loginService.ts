@@ -1,24 +1,23 @@
 import argon2 from "argon2";
 import { IUser } from "../shared/interface";
-import { getUserByEmail } from "./userService";
+import { User } from "../model/userModel";
 
 export async function VerifyCredentials(
   email: string,
   password: string
 ): Promise<IUser | null> {
   try {
-    let user: IUser = await getUserByEmail(email);
-
+    const user: IUser | null = await User.findOne({ email }).select(
+      "+password"
+    );
     if (!user) {
       return null;
     }
-
-    if (user) {
-      console.log(user);
-      return user;
-    } else {
+    const isPasswordValid = await argon2.verify(user.password, password);
+    if (!isPasswordValid) {
       return null;
     }
+    return user;
   } catch (error) {
     console.error(`Error verifying credentials: ${error.message}`);
     return null;

@@ -18,10 +18,10 @@ app.use(generalLimiter);
 app.use(express.json());
 app.use(
   session({
-    secret: "secretnisiya",
+    secret: process.env.SECRET_KEY,
     resave: false,
     saveUninitialized: true,
-    cookie: { secure: false },
+    cookie: { secure: true },
   })
 );
 connectDB().catch((error) => console.error(error));

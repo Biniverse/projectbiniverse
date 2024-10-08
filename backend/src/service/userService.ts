@@ -1,5 +1,5 @@
 import { RegisterForm } from "../shared/types";
-import User from "../model/userModel";
+import { User } from "../model/userModel";
 import { IUser } from "../shared/interface";
 
 export const getApiGreetings = () => {
