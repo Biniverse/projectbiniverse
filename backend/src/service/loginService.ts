@@ -19,9 +19,9 @@ export async function VerifyCredentials(
   password: string
 ): Promise<IUser | null> {
   try {
-    const user: IUser | null = await User.findOne({ email }).select(
-      "+password"
-    );
+    const user: IUser | null = await User.findOne({
+      email: { $eq: email },
+    }).select("+password");
 
     if (!user) {
       return null;
