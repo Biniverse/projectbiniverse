@@ -1,8 +1,24 @@
 import { Request, Response } from "express";
 import { VerifyCredentials } from "../service/loginService";
 import { IUser } from "../shared/interface";
+import { generateToken } from "../shared/generateToken";
 
-// Controller function to handle user login
+/**
+ * The function `LoginUser` handles user login authentication and generates a token upon successful
+ * authentication.
+ * @param {Request} req - The `req` parameter in the `LoginUser` function stands for the request
+ * object, which contains information about the HTTP request made to the server. It includes details
+ * such as the request headers, body, parameters, and more. In this case, the `req` parameter is of
+ * type `Request
+ * @param {Response} res - The `res` parameter in the `LoginUser` function is an object representing
+ * the HTTP response that the server sends back to the client. It allows you to send data back to the
+ * client, such as status codes, headers, and response body. In the provided code snippet, `res` is
+ * @returns The LoginUser function returns a response based on the authentication process. If the email
+ * or password fields are missing, it returns a 417 status with a message indicating that fields cannot
+ * be null. If the credentials are verified successfully, it generates a token for the user and returns
+ * a 200 status with the token. If the credentials are invalid, it returns a 401 status with a message
+ * stating the invalid
+ */
 export const LoginUser = async (req: Request, res: Response) => {
   const { email, password } = req.body;
 
@@ -25,12 +41,10 @@ export const LoginUser = async (req: Request, res: Response) => {
         contact: authenticated.contact,
         role: authenticated.role,
       };
-
-      // TODO: Add encryption to encrypt user data for session storage
-
+      const token = generateToken(user);
       return res.status(200).json({
         success: true,
-        user: user,
+        token: token,
       });
     } else {
       return res.status(401).json({
