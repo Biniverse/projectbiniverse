@@ -1,36 +1,36 @@
 import { Request, Response } from "express";
 import { VerifyCredentials } from "../service/loginService";
-import { IUser } from "../shared/interface";
+import { IUser, UserSession } from "../shared/interface";
 import { generateToken } from "../shared/generateToken";
+import ErrorModule from "../shared/errors";
 
 /**
- * The function `LoginUser` handles user login authentication and generates a token upon successful
- * authentication.
+ * The function `LoginUser` handles user login authentication and returns a token and user information
+ * upon successful authentication or appropriate error messages.
  * @param {Request} req - The `req` parameter in the `LoginUser` function stands for the request
- * object, which contains information about the HTTP request made to the server. It includes details
- * such as the request headers, body, parameters, and more. In this case, the `req` parameter is of
- * type `Request
- * @param {Response} res - The `res` parameter in the `LoginUser` function is an object representing
- * the HTTP response that the server sends back to the client. It allows you to send data back to the
- * client, such as status codes, headers, and response body. In the provided code snippet, `res` is
- * @returns The LoginUser function returns a response based on the authentication process. If the email
- * or password fields are missing, it returns a 417 status with a message indicating that fields cannot
- * be null. If the credentials are verified successfully, it generates a token for the user and returns
- * a 200 status with the token. If the credentials are invalid, it returns a 401 status with a message
- * stating the invalid
+ * object, which contains information about the HTTP request that is being made. This object typically
+ * includes details such as the request headers, body, parameters, and other relevant data sent by the
+ * client to the server. In this case
+ * @param {Response} res - The `res` parameter in the `LoginUser` function stands for the response
+ * object. It is used to send a response back to the client who made the request. In this function, the
+ * response object is used to send JSON responses with status codes and messages based on the outcome
+ * of the login process
+ * @returns The LoginUser function returns a response with status code and JSON data. If the login is
+ * successful, it returns a success message along with a token and user information. If there is an
+ * error during login, it returns a failure message with the appropriate error message based on the
+ * type of error encountered.
  */
 export const LoginUser = async (req: Request, res: Response) => {
   const { email, password } = req.body;
 
   try {
     if (!email || !password) {
-      return res.status(417).json({ message: "Fields cannot be null." });
+      throw new ErrorModule.ArgumentNullException(
+        `Fields are required and cannot be empty `
+      );
     }
 
-    const authenticated: IUser | null = await VerifyCredentials(
-      email,
-      password
-    );
+    const authenticated: UserSession = await VerifyCredentials(email, password);
 
     if (authenticated) {
       const user = {
@@ -45,17 +45,36 @@ export const LoginUser = async (req: Request, res: Response) => {
       return res.status(200).json({
         success: true,
         token: token,
-      });
-    } else {
-      return res.status(401).json({
-        success: false,
-        message: `Invalid credentials for user with email ${email}`,
+        user: user,
       });
     }
   } catch (loginError) {
-    console.error(`An error occurred during login: ${loginError.message}`);
+    if (loginError instanceof ErrorModule.NotFound) {
+      return res
+        .status(loginError.statusCode)
+        .json({ success: false, message: `${loginError.message}` });
+    }
+
+    if (loginError instanceof ErrorModule.Unauthorized) {
+      return res
+        .status(loginError.statusCode)
+        .json({ success: false, message: `${loginError.message}` });
+    }
+
+    if (loginError instanceof ErrorModule.ArgumentNullException) {
+      return res
+        .status(loginError.statusCode)
+        .json({ success: false, message: loginError.message });
+    }
+
+    if (loginError instanceof ErrorModule.NotFound) {
+      return res
+        .status(loginError.statusCode)
+        .json({ success: false, message: `${loginError.message}` });
+    }
+
     return res
-      .status(500)
-      .json({ success: false, message: "Internal server error" });
+      .status(loginError.statusCode)
+      .json({ success: false, message: `${loginError.message}` });
   }
 };
