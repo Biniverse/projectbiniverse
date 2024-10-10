@@ -63,3 +63,17 @@ export const getUsers = async (req: Request, res: Response) => {
     res.status(400).json(error);
   }
 };
+
+export const getUser = async (req: Request, res: Response) => {
+  const { email }: IUser = req.body;
+  try {
+    const user: IUser = await getUserByEmail(email);
+    if (user) {
+      res.status(200).json({
+        data: user,
+      });
+    }
+  } catch (error) {
+    res.status(400).json(error);
+  }
+};

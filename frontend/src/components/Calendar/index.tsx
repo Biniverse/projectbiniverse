@@ -3,6 +3,7 @@ import { CommonConstant } from "../../shared/constants/commonConstants";
 import { CalendarYearComponent } from "./calendarYear";
 import { CalendarMonthsComponent } from "./calendarMonths";
 import { CalendarDatesComponent } from "./calendarDates";
+import { Button } from "flowbite-react";
 
 type LogEntry = {
   date: string;
@@ -112,28 +113,32 @@ export const CalendarComponent = ({
   };
 
   return (
-    <div className="w-full max-w-md mx-auto bg-white rounded-lg shadow-lg">
-      {calendarDisplay == 0 ? (
-        <CalendarDatesComponent
-          isCalendarOnly={isCalendarOnly}
-          logData={logData}
-          changeDisplay={handleDisplayMonths}
-          newDate={{ month: currentMonth, year: currentYear }}
-        />
-      ) : calendarDisplay === 1 ? (
-        <CalendarMonthsComponent
-          monthChunks={monthChunks}
-          currentYear={currentYear}
-          changeDisplay={handleDisplayYears}
-          goToPreviousYear={goToPreviousYear}
-          goToNextYear={goToNextYear}
-        />
-      ) : (
-        <CalendarYearComponent
-          yearChunks={yearChunks}
-          changeDisplay={handleDisplayMonths2}
-        />
-      )}
+    <div className="flex flex-col gap-4 w-full items-end">
+      <Button className="items-end flex flex-row">Time in</Button>
+
+      <div className="w-full max-w-md mx-auto items-end  flex flex-column  bg-white rounded-lg shadow-lg">
+        {calendarDisplay == 0 ? (
+          <CalendarDatesComponent
+            isCalendarOnly={isCalendarOnly}
+            logData={logData}
+            changeDisplay={handleDisplayMonths}
+            newDate={{ month: currentMonth, year: currentYear }}
+          />
+        ) : calendarDisplay === 1 ? (
+          <CalendarMonthsComponent
+            monthChunks={monthChunks}
+            currentYear={currentYear}
+            changeDisplay={handleDisplayYears}
+            goToPreviousYear={goToPreviousYear}
+            goToNextYear={goToNextYear}
+          />
+        ) : (
+          <CalendarYearComponent
+            yearChunks={yearChunks}
+            changeDisplay={handleDisplayMonths2}
+          />
+        )}
+      </div>
     </div>
   );
 };
