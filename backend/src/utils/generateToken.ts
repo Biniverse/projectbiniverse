@@ -1,4 +1,4 @@
-import { UserSession } from "./interface";
+import { UserSession } from "../shared/interface";
 const jwt = require("jsonwebtoken");
 
 /**
