@@ -1,11 +1,10 @@
 export enum ROUTES {
-  HOME = "/",
   NOT_FOUND = "*",
   ABOUT_US = "/about-us",
   USER_LIST = "/user-list",
   ADD_USER = "/sign-up",
   DASHBOARD = "/dashboard",
-  SIGNIN = "/signin",
+  SIGNIN = "/",
 }
 export enum ROLES {
   ADMIN = "admin",

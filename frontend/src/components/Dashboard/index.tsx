@@ -6,7 +6,7 @@ import {
   Dropdown,
   Sidebar,
 } from "flowbite-react";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import ProfileComponent from "../Profile";
 import DrawerComponent from "../Sidebar";
 import AnnouncementComponent from "../Announcement";
@@ -16,6 +16,8 @@ import FileComponent from "../Files";
 import Footer from "../../shared/components/Footer";
 import { CalendarComponent } from "../Calendar";
 import { CommonConstant } from "../../shared/constants/commonConstants";
+import { getUserByEmail } from "../../service/Sign-Up/signUpService";
+import { Console, log } from "console";
 
 const DashboardComponent = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -33,8 +35,12 @@ const DashboardComponent = () => {
           <ProfileDetailsComponent />
           <AnnouncementComponent />
           <div>
-            <Button className="items-end flex flex-row">Time in</Button>
-            <Datepicker inline />
+            {/* <Datepicker inline /> */}
+            <CalendarComponent
+              isCalendarOnly={false}
+              logData={commonConstant.MOCK_DATA_TIME_LOGS}
+            />
+          
           </div>
         </div>
         <div className="flex flex-row gap-4 h-[25vh]">
