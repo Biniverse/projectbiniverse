@@ -24,9 +24,9 @@ export const LoginUser = async (req: Request, res: Response) => {
   const { email, password } = req.body;
 
   try {
-    if (!email || !password) {
+    if (!email || !password || !email.trim() || !password.trim()) {
       throw new ErrorModule.ArgumentNullException(
-        `Fields are required and cannot be empty `
+        `Fields are required and cannot be empty or contains only spaces `
       );
     }
 
