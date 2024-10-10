@@ -3,7 +3,8 @@ import { ROLES } from "../shared/enums";
 import { IUser } from "../shared/interface";
 import Counter from "./idCounterSchema";
 
-const userSchema = new mongoose.Schema<IUser>({
+// Shared user fields
+const sharedUserSchemaFields = {
   employeeId: {
     type: Number,
     unique: true,
@@ -26,15 +27,19 @@ const userSchema = new mongoose.Schema<IUser>({
     unique: true,
     lowercase: true,
   },
-  password: {
-    type: String,
-    required: true,
-    select: false,
-  },
   role: {
     type: String,
     enum: Object.values(ROLES),
     required: true,
+  },
+};
+
+const userSchema = new mongoose.Schema<IUser>({
+  ...sharedUserSchemaFields,
+  password: {
+    type: String,
+    required: true,
+    select: false,
   },
 });
 
@@ -48,9 +53,10 @@ userSchema.pre("save", async function (next) {
 
     this.employeeId = counter.sequenceValue;
   }
+
   next();
 });
 
-const User = mongoose.model("User", userSchema);
+const User = mongoose.model<IUser>("User", userSchema);
 
-export default User;
+export { User };

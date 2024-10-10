@@ -9,3 +9,12 @@ export interface IUser {
   password: string;
   role: ROLES;
 }
+
+export interface UserSession {
+  employeeId: number;
+  firstName: string;
+  lastName: string;
+  email: string;
+  contact: string;
+  role: ROLES;
+}

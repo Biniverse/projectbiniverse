@@ -29,3 +29,9 @@ export const USERMESSAGE = {
 export const ERROR = {
   LIMIT: "Too many requests, please try again after 15 minutes",
 };
+
+export const LOGINERROR = {
+  NOTFOUND: "User not found.",
+  INVALIDCREDENTIALS: "Invalid username/password. Please try again later",
+  LOGINSUCCSS: "Successfully logged in",
+};

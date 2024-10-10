@@ -5,6 +5,7 @@ import userRouter from "./routes/userRoutes";
 import dotenv from "dotenv";
 import { connectDB } from "./config/database";
 import { generalLimiter } from "./middleware/limiter";
+import session from "express-session";
 
 dotenv.config();
 const app = express();
@@ -15,6 +16,14 @@ app.use(helmet());
 app.use(cors());
 app.use(generalLimiter);
 app.use(express.json());
+app.use(
+  session({
+    secret: process.env.SECRET_KEY,
+    resave: false,
+    saveUninitialized: true,
+    cookie: { secure: true },
+  })
+);
 connectDB().catch((error) => console.error(error));
 // Routes
 app.use("/", userRouter);
