@@ -18,3 +18,12 @@ export const registerUser = async (user: ISignUp): Promise<ISignUpResponse> => {
     throw error;
   }
 };
+
+export const getUserByEmail = async (email: string): Promise<IUser> => {
+  try {
+    const { data } = await http.post("getuser", { email });
+    return data;
+  } catch (error) {
+    throw error;
+  }
+};
