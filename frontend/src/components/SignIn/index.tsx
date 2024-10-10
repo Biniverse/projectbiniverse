@@ -67,7 +67,7 @@ export const Signin = () => {
 
   return (
     <>
-      <div className="flex justify-center px-6 py-12 lg:px-8 size-1/2 bg-white rounded-2xl my-32">
+      <div className="flex justify-center px-6 py-12 lg:px-8 size-1/2 bg-white overflow-hidden rounded-2xl my-32">
         <div className="sm:mx-100 sm:w-full sm:max-w-sm h-[600px]">
           <Carousel>
             {LOGIN_CAROUSEL_IMAGES.map((bini, index) => (
