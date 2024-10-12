@@ -19,8 +19,9 @@ const http: AxiosInstance = axios.create({
 http.interceptors.request.use(
   (config: InternalAxiosRequestConfig) => {
     //TODO: IMPLEMENT JWT TO ADD BEARER TOKEN
-    // Example: config.headers.Authorization = `Bearer ${CEB-X-CAP TOKEN}`;
-    config.headers.TEST = "TEST YAWA";
+    const token = localStorage.getItem("user");
+
+    config.headers.Authorization = `Bearer ${token}`;
     return config;
   },
   (error: AxiosError) => {

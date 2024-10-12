@@ -2,19 +2,12 @@ import { Avatar, Card } from "flowbite-react";
 import React, { useEffect, useState } from "react";
 import { getUserByEmail } from "../../service/Sign-Up/signUpService";
 import { IUser } from "../../shared/interface";
+import { TestComponent } from "./test";
+import useCount from "../../store/useCount";
 
 const ProfileDetailsComponent = () => {
   //Get user details
-  useEffect(() => {
-    async function getuser() {
-      //Todo: should be dyamic
-      const user = await getUserByEmail("bini@bini.com");
-      console.log(user);
-      setUser(user);
-    }
-    getuser();
-  }, []);
-
+  const { count } = useCount();
   const [user, setUser] = useState<IUser>();
 
   //Get today's date
@@ -31,6 +24,16 @@ const ProfileDetailsComponent = () => {
     day: "numeric",
   };
   const fullDate = today.toLocaleDateString("en-US", dateOptions);
+
+  useEffect(() => {
+    async function getuser() {
+      //Todo: should be dyamic
+      const user = await getUserByEmail("bini@bini.com");
+      console.log(user);
+      setUser(user);
+    }
+    getuser();
+  }, []);
 
   return (
     <div className="flex flex-col items-start w-auto dark:text-white">
@@ -68,6 +71,7 @@ const ProfileDetailsComponent = () => {
           <div className="p-4">Late</div>
           <div className="p-4">Absences</div>
           <div className="p-4">Undertime</div>
+          <TestComponent />
         </div>
       </Card>
     </div>

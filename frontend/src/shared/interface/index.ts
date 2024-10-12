@@ -13,6 +13,14 @@ export interface IUser {
   role: ROLES;
   employeeId: number;
 }
+export interface ISignInUser {
+  firstName: string;
+  lastName: string;
+  email: string;
+  contact: string;
+  role: ROLES;
+  employeeId: number;
+}
 
 export interface ISignUp {
   firstName: string;
@@ -32,6 +40,8 @@ export interface ISignIn {
 }
 
 export interface ISignInResponse {
-  success: string;
+  success: boolean;
+  token: string;
+  user: ISignInUser;
   error?: string; // Optional to handle error cases
 }

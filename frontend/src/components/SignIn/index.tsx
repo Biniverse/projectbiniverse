@@ -10,6 +10,7 @@ import { LOGIN_CAROUSEL_IMAGES } from "../../shared/constants/biniImages";
 import useGlobalStore from "../../store/useGlobalStore";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import { useUserStore } from "../../store/useUserStore";
 
 export const Signin = () => {
   const {
@@ -23,16 +24,17 @@ export const Signin = () => {
   const [toastVisible, setToastVisible] = useState<boolean>(false);
   const [toastMessage, setToastMessage] = useState<string>("");
   const [toastType, setToastType] = useState<TOAST_TYPE>(TOAST_TYPE.ERROR);
+  const { setUser, user } = useUserStore();
   const navigate = useNavigate();
 
   const onSubmit: SubmitHandler<ISignIn> = async (data: ISignIn) => {
     console.log(data);
     try {
-      const { success } = await signInService(data);
-
+      const { success, token, user } = await signInService(data);
+      setUser(user, success, token);
       if (success) {
         reset();
-        setToastMessage(success);
+        setToastMessage(String(success));
         setToastType(TOAST_TYPE.SUCCESS);
         setToastVisible(true);
         setTimeout(() => {

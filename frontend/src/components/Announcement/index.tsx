@@ -1,13 +1,15 @@
 import { Button, Card, Carousel, Datepicker } from "flowbite-react";
 import React from "react";
+import { useUserStore } from "../../store/useUserStore";
 
 const AnnouncementComponent = () => {
+  const { user } = useUserStore();
   return (
     <div className="flex flex-col items-start gap-4 w-full">
       <div className="flex flex-row">
         <div className="w-auto flex items-start flex-col">
           <div className="text-[22px] font-semibold dark:text-white">
-            Good morning, User!
+            Good morning, {user.firstName} {user.lastName} {user.email}
           </div>
           <h3 className="dark:text-white text-h3">Announcements</h3>
         </div>
