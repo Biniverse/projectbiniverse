@@ -25,9 +25,9 @@ export const useUserStore = create(
       token: "",
       setUser: (user: ISignInUser, isAuthenticated: boolean, token: string) =>
         set({
-          token: token,
+          ...user,
           isAuthenticated: isAuthenticated,
-          user: user,
+          token: token,
         }),
     }),
     {
