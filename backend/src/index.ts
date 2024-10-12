@@ -21,7 +21,7 @@ app.use(
     secret: process.env.SECRET_KEY,
     resave: false,
     saveUninitialized: true,
-    cookie: { secure: true },
+    cookie: { secure: process.env.ENVIRONMENT === "DEV" ? false : true },
   })
 );
 connectDB().catch((error) => console.error(error));

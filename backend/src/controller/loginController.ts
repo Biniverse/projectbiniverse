@@ -1,7 +1,7 @@
 import { Request, Response } from "express";
 import { VerifyCredentials } from "../service/loginService";
 import { IUser, UserSession } from "../shared/interface";
-import { generateToken } from "../shared/generateToken";
+import { generateToken } from "../utils/generateToken";
 import ErrorModule from "../shared/errors";
 
 /**
@@ -24,9 +24,9 @@ export const LoginUser = async (req: Request, res: Response) => {
   const { email, password } = req.body;
 
   try {
-    if (!email || !password) {
+    if (!email || !password || !email.trim() || !password.trim()) {
       throw new ErrorModule.ArgumentNullException(
-        `Fields are required and cannot be empty `
+        `Fields are required and cannot be empty or contains only spaces `
       );
     }
 
@@ -49,28 +49,16 @@ export const LoginUser = async (req: Request, res: Response) => {
       });
     }
   } catch (loginError) {
-    if (loginError instanceof ErrorModule.NotFound) {
-      return res
-        .status(loginError.statusCode)
-        .json({ success: false, message: `${loginError.message}` });
-    }
-
-    if (loginError instanceof ErrorModule.Unauthorized) {
-      return res
-        .status(loginError.statusCode)
-        .json({ success: false, message: `${loginError.message}` });
-    }
-
-    if (loginError instanceof ErrorModule.ArgumentNullException) {
-      return res
-        .status(loginError.statusCode)
-        .json({ success: false, message: loginError.message });
-    }
-
-    if (loginError instanceof ErrorModule.NotFound) {
-      return res
-        .status(loginError.statusCode)
-        .json({ success: false, message: `${loginError.message}` });
+    const errorResponse = {
+      success: false,
+      message: loginError.message,
+    };
+    if (
+      loginError instanceof ErrorModule.NotFound ||
+      loginError instanceof ErrorModule.Unauthorized ||
+      loginError instanceof ErrorModule.ArgumentNullException
+    ) {
+      return res.status(loginError.statusCode).json(errorResponse);
     }
 
     return res

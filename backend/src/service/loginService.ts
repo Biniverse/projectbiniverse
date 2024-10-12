@@ -39,11 +39,11 @@ export async function VerifyCredentials(
     return user;
   } catch (error) {
     if (
-      !(error instanceof ErrorModule.NotFound) ||
-      !(error instanceof ErrorModule.Unauthorized)
+      error instanceof ErrorModule.NotFound ||
+      error instanceof ErrorModule.Unauthorized
     ) {
-      throw new ErrorModule.InternalServerError();
+      throw error;
     }
-    throw error;
+    throw new ErrorModule.InternalServerError();
   }
 }
