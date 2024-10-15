@@ -5,6 +5,7 @@ export enum ROUTES {
   ADD_USER = "/sign-up",
   DASHBOARD = "/dashboard",
   SIGNIN = "/",
+  TIMELOGS = "/time-logs"
 }
 export enum ROLES {
   ADMIN = "admin",

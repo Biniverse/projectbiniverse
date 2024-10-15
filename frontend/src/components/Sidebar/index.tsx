@@ -82,7 +82,10 @@ export default function DrawerComponent() {
             Log Request
           </Sidebar.Item>
 
-          <Sidebar.Item href="#">
+          <Sidebar.Item
+            onClick={() => navigate(ROUTES.TIMELOGS)}
+            className="cursor-pointer"
+          >
             {" "}
             <svg
               xmlns="http://www.w3.org/2000/svg"
