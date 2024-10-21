@@ -10,7 +10,7 @@ import {
 } from "flowbite-react";
 import { useEffect, useState } from "react";
 import { IUser } from "../../../shared/interface";
-import { getAllUsers } from "../../../service/Sign-Up/signUpService";
+import { getAllUsers } from "../../../service/Add-Employee/signUpService";
 import { toUpperCase } from "../../../utils/toUpperCase";
 import { useNavigate } from "../../../hooks/useNavigate";
 import { ROUTES } from "../../../shared/enum";

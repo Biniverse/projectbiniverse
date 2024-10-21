@@ -16,7 +16,7 @@ import FileComponent from "../Files";
 import Footer from "../../shared/components/Footer";
 import { CalendarComponent } from "../Calendar";
 import { CommonConstant } from "../../shared/constants/commonConstants";
-import { getUserByEmail } from "../../service/Sign-Up/signUpService";
+import { getUserByEmail } from "../../service/Add-Employee/signUpService";
 import { Console, log } from "console";
 
 const DashboardComponent = () => {
@@ -40,7 +40,6 @@ const DashboardComponent = () => {
               isCalendarOnly={false}
               logData={commonConstant.MOCK_DATA_TIME_LOGS}
             />
-          
           </div>
         </div>
         <div className="flex flex-row gap-4 h-[25vh]">

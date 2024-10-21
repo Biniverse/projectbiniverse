@@ -1,6 +1,5 @@
-import React from "react";
-import { SignUpComponent } from "../components/SignUp";
+import { AddEmployeeComponent } from "../components/Add-Employee";
 
 export const SignUp = () => {
-  return <SignUpComponent />;
+  return <AddEmployeeComponent />;
 };

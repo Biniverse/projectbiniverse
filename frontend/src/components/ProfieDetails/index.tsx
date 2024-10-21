@@ -1,6 +1,6 @@
 import { Avatar, Card } from "flowbite-react";
 import React, { useEffect, useState } from "react";
-import { getUserByEmail } from "../../service/Sign-Up/signUpService";
+import { getUserByEmail } from "../../service/Add-Employee/signUpService";
 import { IUser } from "../../shared/interface";
 
 const ProfileDetailsComponent = () => {
