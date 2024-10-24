@@ -20,7 +20,12 @@ http.interceptors.request.use(
   (config: InternalAxiosRequestConfig) => {
     //TODO: IMPLEMENT JWT TO ADD BEARER TOKEN
     // Example: config.headers.Authorization = `Bearer ${CEB-X-CAP TOKEN}`;
-    config.headers.TEST = "TEST YAWA";
+    // config.headers.TEST = "TEST YAWA";
+    const storedData = sessionStorage.getItem("auth");
+    if (storedData) {
+      const parsedData = JSON.parse(storedData);
+      config.headers.Authorization = `Bearer ${parsedData.state.token}`;
+    }
     return config;
   },
   (error: AxiosError) => {

@@ -1,15 +1,15 @@
-import React, { useState } from "react";
-import { signInService } from "../../service/SignIn/signInService";
+import axios from "axios";
 import { Carousel, FloatingLabel } from "flowbite-react";
-import { CommonConstant } from "../../shared/constants/commonConstants";
+import { useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
-import { ISignIn } from "../../shared/interface";
-import { ROUTES, TOAST_TYPE } from "../../shared/enum";
+import { useNavigate } from "react-router-dom";
+import { signInService } from "../../service/SignIn/signInService";
 import ToastComponent from "../../shared/components/CustomToast";
 import { LOGIN_CAROUSEL_IMAGES } from "../../shared/constants/biniImages";
-import useGlobalStore from "../../store/useGlobalStore";
-import axios from "axios";
-import { useNavigate } from "react-router-dom";
+import { CommonConstant } from "../../shared/constants/commonConstants";
+import { ROUTES, TOAST_TYPE } from "../../shared/enum";
+import { ISignIn } from "../../shared/interface";
+import useAuthStore from "../../store/useAuthStore";
 
 export const Signin = () => {
   const {
@@ -23,16 +23,16 @@ export const Signin = () => {
   const [toastVisible, setToastVisible] = useState<boolean>(false);
   const [toastMessage, setToastMessage] = useState<string>("");
   const [toastType, setToastType] = useState<TOAST_TYPE>(TOAST_TYPE.ERROR);
+  const { login } = useAuthStore();
   const navigate = useNavigate();
 
   const onSubmit: SubmitHandler<ISignIn> = async (data: ISignIn) => {
-    console.log(data);
     try {
-      const { success } = await signInService(data);
-
+      const { success, token, user } = await signInService(data);
       if (success) {
         reset();
-        setToastMessage(success);
+        login(success, token, user);
+        setToastMessage(success.toString());
         setToastType(TOAST_TYPE.SUCCESS);
         setToastVisible(true);
         setTimeout(() => {

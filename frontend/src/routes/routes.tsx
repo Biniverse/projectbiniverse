@@ -6,7 +6,7 @@ import { About } from "../page/About";
 import { Dashboard } from "../page/Dashboard";
 import { UserList } from "../page/UserList";
 import { SignUp } from "../page/SignUp";
-import { Signin } from "../components/SignIn";
+import { SIGNIN } from "../page/SignIn";
 import ProtectedLayout from "../layout/ProtectedLayout";
 
 export const router = createBrowserRouter([
@@ -39,11 +39,7 @@ export const router = createBrowserRouter([
     element: <NotFound />,
   },
   {
-    path: ROUTES.DASHBOARD,
-    element: <Dashboard />,
-  },
-  {
     path: ROUTES.SIGNIN,
-    element: <Signin />,
+    element: <SIGNIN />,
   },
 ]);

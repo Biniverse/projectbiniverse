@@ -34,6 +34,7 @@ export const LoginUser = async (req: Request, res: Response) => {
 
     if (authenticated) {
       const user = {
+        _id: authenticated._id,
         employeeId: authenticated.employeeId,
         firstName: authenticated.firstName,
         lastName: authenticated.lastName,
