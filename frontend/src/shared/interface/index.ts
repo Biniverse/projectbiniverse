@@ -9,7 +9,7 @@ export interface IUser {
   lastName: string;
   email: string;
   contact: string;
-  password: string;
+  password?: string;
   role: ROLES;
   employeeId: number;
 }
@@ -32,6 +32,8 @@ export interface ISignIn {
 }
 
 export interface ISignInResponse {
-  success: string;
+  success: boolean;
+  token: string;
+  user: IUser;
   error?: string; // Optional to handle error cases
 }

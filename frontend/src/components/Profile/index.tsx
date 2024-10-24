@@ -1,7 +1,9 @@
 import { Avatar, Dropdown } from "flowbite-react";
 import React from "react";
+import useAuthStore from "../../store/useAuthStore";
 
 const ProfileComponent = () => {
+  const { user, logout } = useAuthStore();
   return (
     <div>
       <div className="relative flex leading-none">
@@ -13,16 +15,14 @@ const ProfileComponent = () => {
           inline
         >
           <Dropdown.Header>
-            <span className="text-sm">Bonnie Green</span>
-            <span className="truncate text-sm font-medium">
-              name@flowbite.com
-            </span>
+            {/* <span className="text-sm">Bonnie Green</span> */}
+            <span className="truncate text-sm font-medium">{user.email}</span>
           </Dropdown.Header>
           <Dropdown.Item>Dashboard</Dropdown.Item>
           <Dropdown.Item>Settings</Dropdown.Item>
           <Dropdown.Item>Earnings</Dropdown.Item>
           <Dropdown.Divider />
-          <Dropdown.Item>Sign out</Dropdown.Item>
+          <Dropdown.Item onClick={() => logout()}>Sign out</Dropdown.Item>
         </Dropdown>
       </div>
     </div>
