@@ -27,7 +27,6 @@ export const Signin = () => {
   const navigate = useNavigate();
 
   const onSubmit: SubmitHandler<ISignIn> = async (data: ISignIn) => {
-    console.log(data);
     try {
       const { success, token, user } = await signInService(data);
       if (success) {
